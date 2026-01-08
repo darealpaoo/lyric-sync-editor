@@ -129,6 +129,10 @@ body {
   white-space: nowrap;
 }
 
+a.btn {
+  text-decoration: none;
+}
+
 /* Fix dropdown menu colors for language/theme selects (best-effort across browsers) */
 select.btn,
 .speed-control select {
@@ -752,7 +756,13 @@ select:focus-visible {
   }
 
   .header h1 span {
-    display: none;
+    display: inline;
+    font-size: 0.9rem;
+  }
+
+  .header h1 .logo {
+    width: 24px;
+    height: 24px;
   }
 
   .header-controls {
