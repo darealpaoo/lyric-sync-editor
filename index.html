@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="logo.png" />
+    <script src="https://unpkg.com/wavesurfer.js@7"></script>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="en.lang.js"></script>
+    <script src="vi.lang.js"></script>
+  </head>
+  <body>
+    <header class="header">
+      <h1>
+        <img src="logo.png" alt="Logo" class="logo" />
+        <span>Lyric Sync Editor</span>
+      </h1>
+      <div class="header-controls">
+        <select class="btn" id="languageSelect" aria-label="Language">
+          <option value="en"></option>
+          <option value="vi"></option>
+        </select>
+        <select class="btn" id="themeSelect" aria-label="Theme">
+          <option value="system"></option>
+          <option value="dark"></option>
+          <option value="light"></option>
+        </select>
+        <button class="btn" id="btnClearAll">🗑️</button>
+      </div>
+    </header>
+
+    <main class="main-container">
+      <!-- Waveform Section -->
+      <section class="waveform-section">
+        <div class="waveform-header">
+          <h2 id="titleWaveform">🎧</h2>
+          <div class="time-display">
+            <span id="currentTime">00:00.00</span> /
+            <span id="totalTime">00:00.00</span>
+          </div>
+        </div>
+        <div id="waveform"></div>
+        <div class="playback-controls">
+          <button class="btn playback-btn" id="btnBackward" title="Backward 2s">
+            <svg
+              class="playback-icon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <polygon points="11,12 21,5 21,19" fill="currentColor"></polygon>
+              <polygon points="3,12 13,5 13,19" fill="currentColor"></polygon>
+            </svg>
+          </button>
+          <button
+            class="btn playback-btn play-pause"
+            id="btnPlayPause"
+            title="Play/Pause"
+          >
+            <svg
+              class="playback-icon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d="M8 5v14l11-7z" fill="currentColor"></path>
+            </svg>
+          </button>
+          <button class="btn playback-btn" id="btnForward" title="Forward 2s">
+            <svg
+              class="playback-icon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <polygon points="13,12 3,5 3,19" fill="currentColor"></polygon>
+              <polygon points="21,12 11,5 11,19" fill="currentColor"></polygon>
+            </svg>
+          </button>
+          <div class="speed-control">
+            <label for="playbackSpeed" id="labelSpeed"></label>
+            <select id="playbackSpeed">
+              <option value="0.5">0.5x</option>
+              <option value="0.75">0.75x</option>
+              <option value="1" selected>1x</option>
+              <option value="1.25">1.25x</option>
+              <option value="1.5">1.5x</option>
+              <option value="2">2x</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <!-- Content Section -->
+      <section class="content-section">
+        <!-- Input Panel -->
+        <div class="panel">
+          <div class="panel-header">
+            <h2 id="titleInput">📝</h2>
+          </div>
+          <div class="panel-content">
+            <div class="file-input-wrapper">
+              <input type="file" id="audioFile" accept="audio/*" />
+              <button class="btn btn-primary" id="btnChooseFile">🎵</button>
+              <span class="file-name" id="fileName"></span>
+            </div>
+
+            <textarea
+              class="lyrics-textarea"
+              id="lyricsInput"
+              placeholder=""
+            ></textarea>
+
+            <div class="input-actions">
+              <button class="btn btn-primary" id="btnLoadLyrics">📥</button>
+              <button class="btn" id="btnClearLyrics">🧹</button>
+            </div>
+
+            <div class="record-mode" id="recordModeIndicator">
+              <span class="record-dot"></span>
+              <span></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lyrics List Panel -->
+        <div class="panel">
+          <div class="panel-header">
+            <h2 id="titleTimeline">🎤</h2>
+            <span id="lyricsCount"></span>
+          </div>
+          <div class="panel-content">
+            <div class="lyrics-list" id="lyricsList">
+              <div class="empty-state">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
+                  <path
+                    d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2z"
+                  />
+                </svg>
+                <p></p>
+                <p></p>
+              </div>
+            </div>
+
+            <div class="export-actions">
+              <button class="btn" id="btnCopyLRC">📋</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="status-bar">
+      <div class="toast" id="toast"></div>
+      <div class="shortcut">
+        <span id="shortcutPlayPause"><kbd>Space</kbd></span>
+        <span id="shortcutSync"><kbd>Enter</kbd></span>
+        <span id="shortcutNav"><kbd>↑↓</kbd></span>
+        <span id="shortcutSeek"><kbd>←→</kbd></span>
+      </div>
+      <span id="statusText"></span>
+    </footer>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
